@@ -1,61 +1,45 @@
 @echo off
-:: [Loading sequence remains the same...]
-echo Loading text based desktop enviorment...
 set version=0.1
-timeout /t 1 >nul
 
 :start_screen
 cls
 echo --------------------------------
-echo | Info                         |
+echo |  Welcome to your TUI Desktop |
 echo |------------------------------|
-echo | Press any key to continue    |
-echo ---------------------------------
+echo | Press any key to start...    |
+echo --------------------------------
 pause >nul
 
 :main_desktop
 cls
 echo --------------------------------------------------------------
-echo |                                                            |
 echo | Welcome!                                                   |
 echo |                                                            |
 echo | 1: File Editor                                             |
 echo | 2: Software Manager                                        |
-echo |                                                            |
+echo | 3: Exit to Bash                                            |
 echo --------------------------------------------------------------
-:: Check for HIGHEST errorlevel first
-choice /c 12 /n /m " "
+:: Check HIGHEST first (3, then 2, then 1)
+choice /c 123 /n /m "Select: "
+if errorlevel 3 exit
 if errorlevel 2 goto softwaremanager
 if errorlevel 1 goto fileeditor
+:: This safety line prevents a crash if something goes wrong
 goto main_desktop
 
 :fileeditor
 cls
 echo --- File Editor ---
-set /p filename="File name: "
+set /p filename="Enter filename: "
 if not exist "%filename%" type nul > "%filename%"
-echo Type text. Press Ctrl+Z then Enter to save.
+echo Editing %filename%... (Ctrl+Z then Enter to save)
 copy con "%filename%"
+:: Go BACK to the desktop when done, don't let it fall into softwaremanager
 goto main_desktop
 
 :softwaremanager
 cls
 echo --- Software Manager ---
-echo 1: Install
-echo 2: Uninstall
-echo 3: Back
-choice /c 123 /n /m " "
-:: Again, check in descending order
-if errorlevel 3 goto main_desktop
-if errorlevel 2 goto uninstallsoftware
-if errorlevel 1 goto installsoftware
-
-:installsoftware
-echo Not implemented.
-pause
-goto softwaremanager
-
-:uninstallsoftware
-echo Not implemented.
-pause
-goto softwaremanager
+echo 1: Back to Desktop
+choice /c 1 /n /m "Press 1 to go back"
+goto main_desktop
