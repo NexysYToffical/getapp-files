@@ -21,7 +21,7 @@ echo  3: Exit to Bash
 echo --------------------------------------------------------------
 :: Check HIGHEST first (3, then 2, then 1)
 choice /c 123 /n /m "Select: "
-if errorlevel 3 exit
+if errorlevel 3 cd .. && index
 if errorlevel 2 goto softwaremanager
 if errorlevel 1 goto fileeditor
 :: This safety line prevents a crash if something goes wrong
