@@ -4,20 +4,20 @@ set version=0.1
 :start_screen
 cls
 echo --------------------------------
-echo |  Welcome to your TUI Desktop |
-echo |------------------------------|
-echo | Press any key to start...    |
+echo   Welcome to your TUI Desktop 
+echo ------------------------------
+echo  Press any key to start...    
 echo --------------------------------
 pause >nul
 
 :main_desktop
 cls
 echo --------------------------------------------------------------
-echo | Welcome!                                                   |
-echo |                                                            |
-echo | 1: File Editor                                             |
-echo | 2: Software Manager                                        |
-echo | 3: Exit to Bash                                            |
+echo  Welcome!                                                   
+echo                                                             
+echo  1: File Editor                                             
+echo  2: Software Manager                                        
+echo  3: Exit to Bash                                            
 echo --------------------------------------------------------------
 :: Check HIGHEST first (3, then 2, then 1)
 choice /c 123 /n /m "Select: "
